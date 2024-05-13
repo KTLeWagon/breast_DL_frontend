@@ -65,3 +65,7 @@ st.markdown("---")
 
 res = requests.post(url + "/predict", files={'img': img_bytes})
 st.header(f'Your result: ${res.content.decode("utf-8")}')
+
+
+def test():
+    return True
