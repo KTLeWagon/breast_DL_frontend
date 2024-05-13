@@ -16,7 +16,7 @@ st.set_page_config(
 # url = 'http://api:8000'
 # Example localhost development URL
 url = 'http://localhost:8000' ## ## this needs to be changed and hardcoded
-
+url = 'https://breastlesion-ojtk5b3jdq-ew.a.run.app/'
 
 # App title and description
 st.header('Breast Lesion Detection')
@@ -29,6 +29,7 @@ st.markdown("---")
 ### Create a native Streamlit file upload input
 st.markdown("### Let's upload your picture. 👇")
 img_file_buffer = st.file_uploader('Upload an image')
+img_bytes = img_file_buffer.getvalue()
 
 if img_file_buffer is not None:
 
@@ -37,25 +38,30 @@ if img_file_buffer is not None:
   with col1:
     ### Display the image user uploaded
     st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded ☝️")
-
+## the below col2 code is not running (copy from boilerplate only)
   with col2:
     with st.spinner("Wait for it..."):
       ### Get bytes from the file buffer
+
       img_bytes = img_file_buffer.getvalue()
 
       ### Make request to  API (stream=True to stream response as bytes)
       res = requests.post(url + "/predict", files={'img': img_bytes})
 
       if res.status_code == 200:
-        ### Display the image returned by the API
-        st.image(res.content, caption="Image returned from API ☝️")
+        ### Return the prediction
+        print(res.content)
         print("Hi I worked")
       else:
         st.markdown("**Oops**, something went wrong 😓 Please try again.")
         print(res.status_code, res.content)
 
-st.markdown('''
-            > Here the result
-            ''')
+
+
 
 st.markdown("---")
+
+
+
+res = requests.post(url + "/predict", files={'img': img_bytes})
+st.header(f'Your result: ${res.content.decode("utf-8")}')
