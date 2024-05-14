@@ -23,7 +23,7 @@ url = 'https://breastlesion-ojtk5b3jdq-ew.a.run.app/'
 
 
 # Load the background image
-image_path = "/home/joana/code/KTLeWagon/breast_DL_frontend/final image_resized.jpg"
+image_path = "final image_resized.jpg"
 with open(image_path, "rb") as img_file:
     img_encoded = base64.b64encode(img_file.read()).decode()
 
@@ -83,9 +83,13 @@ if img_file_buffer is not None:
         with st.spinner("Wait for it..."):
             ### Get bytes from the file buffer
             res = requests.post(url + "/predict", files={'img': img_bytes})
-            print(res.content)
+            proba_benign=eval(res.content.decode("utf-8"))[0]
+            proba_malignant=eval(res.content.decode("utf-8"))[1]
+            print(proba_malignant)
+            print(res.content.decode("utf-8"))
             st.markdown(f'<div style="display: flex; justify-content: center;"><div style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; text-align: center;"><h3 style="font-size: 24px;">Your result: ${res.content.decode("utf-8")}</h3></div></div>', unsafe_allow_html=True)
-
+            if proba_malignant<0.2:
+                st.success(f'Probability is benign {proba_benign}')
 
             ### Make request to  API (stream=True to stream response as bytes)
 
