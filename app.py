@@ -57,16 +57,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown("---")
-if st.checkbox('How it Works'):
-
-    st.markdown('''
-    <h3 style="font-size: 14px;">
-        1. Upload Image: Start by uploading an image of a breast lesion using the file uploader.<br>
-        2. Prediction: The application will then use a deep learning model to analyze the uploaded image and predict if the lesion is benign or malignant.<br>
-        3. Result: Once the prediction is made, the application will display the result, indicating whether the uploaded image contains a benign or malignant breast lesion.
-    </h3>
-''', unsafe_allow_html=True)
 
 st.markdown("---")
 
