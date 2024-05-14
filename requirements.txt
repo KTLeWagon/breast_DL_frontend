@@ -1,0 +1,8 @@
+# web
+streamlit
+requests
+python-dotenv
+
+#image
+opencv-python
+Pillow
