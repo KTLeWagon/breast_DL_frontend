@@ -37,7 +37,11 @@ if img_file_buffer is not None:
 
     with col1:
         ### Display the image user uploaded
-        st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded ☝️")
+        uploaded_image = Image.open(img_file_buffer)
+        uploaded_image.thumbnail((300, 300))  # Resize image
+        st.image(uploaded_image, caption="Here's the image you uploaded ☝️")
+
+
 
 
 ## the below col2 code is not running (copy from boilerplate only)
