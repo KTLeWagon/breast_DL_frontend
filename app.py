@@ -89,11 +89,11 @@ if img_file_buffer is not None:
             #print(res.content.decode("utf-8"))
             #st.markdown(f'<div style="display: flex; justify-content: center;"><div style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; text-align: center;"><h3 style="font-size: 24px;">Your result: ${res.content.decode("utf-8")}</h3></div></div>', unsafe_allow_html=True)
             if proba_benign >= 0.7:
-                st.success(f'The predicted probability of the lesion being benign is {round(proba_benign, 2)}')
+                st.success(f'The predicted probability of the lesion being benign is {int(proba_benign*100)}%')
             elif proba_malignant>= 0.7:
-                st.error(f'The predicted probability of the lesion being malignant is {round(proba_malignant,2)}')
+                st.error(f'The predicted probability of the lesion being malignant is {int(proba_malignant*100)}%')
             else:
-                st.warning(f'Uncertainty warning! The predicted probability of the lesion being benign is only: {round(proba_benign,2)}, and being malignant: {round(proba_malignant,2)}')
+                st.warning(f'Uncertainty warning! The predicted probability of the lesion being benign is only: {int(proba_benign*100)}%, and being malignant: {int(proba_malignant*100)}%')
             ### Make request to  API (stream=True to stream response as bytes)
 
         if res.status_code == 200:
